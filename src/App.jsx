@@ -1,3 +1,4 @@
+import React,{useState} from "react";
 import "./App.css";
 import SendIcon from "@mui/icons-material/Send";
 import { Button, Input } from "@mui/material";
@@ -6,6 +7,15 @@ import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 
 function App() {
+ const [todoList,setTodoList] = useState([])
+  const [todo,setTodo] = useState("")
+ 
+ const addTodo  = () =>{
+  setTodoList([...todoList,todo])
+  console.log(todoList)
+ }
+
+
   return (
     <div className="app">
       <h1 style={{ textAlign: "center" }}>Todo App</h1>
@@ -15,13 +25,16 @@ function App() {
           className="todoInput"
           color="primary"
           placeholder="Enter Todo..."
+          onChange={e=>setTodo(e.target.value)}
+          
         />
-        {/* <TextField id="Outlined secondary" color="secondary" size="small" label="Outlined" variant="outlined" /> */}
+
         <Button
           variant="contained"
           className="todoBtn"
           color="success"
           endIcon={<SendIcon />}
+          onClick={addTodo}
         >
           Add Todo
         </Button>
@@ -36,50 +49,32 @@ function App() {
       </div>
       <div className="todoList">
         <ul className="todo">
-          <li>
-            Hello
+          {todoList?.map((value,key)=>{
+             return( <li key={key}>
+           {value}
             <div>
-              <Fab color="primary" className="editBtn" size="small" aria-label="edit">
+              <Fab
+                color="primary"
+                className="editBtn"
+                size="small"
+                aria-label="edit"
+              >
                 <EditIcon />
               </Fab>
-              <Fab color="error" className="editBtn" size="small" aria-label="edit">
+              <Fab
+                color="error"
+                className="editBtn"
+                size="small"
+                aria-label="edit"
+              >
                 <DeleteIcon />
               </Fab>
             </div>
           </li>
-          <li>
-            Hello
-            <div>
-              <Fab color="primary" className="editBtn" size="small" aria-label="edit">
-                <EditIcon />
-              </Fab>
-              <Fab color="error" className="editBtn" size="small" aria-label="edit">
-                <DeleteIcon />
-              </Fab>
-            </div>
-          </li>
-          <li>
-            Hello
-            <div>
-              <Fab color="primary" className="editBtn" size="small" aria-label="edit">
-                <EditIcon />
-              </Fab>
-              <Fab color="error" className="editBtn" size="small" aria-label="edit">
-                <DeleteIcon />
-              </Fab>
-            </div>
-          </li>
-          <li>
-            Hello
-            <div>
-              <Fab color="primary" className="editBtn" size="small" aria-label="edit">
-                <EditIcon />
-              </Fab>
-              <Fab color="error" className="editBtn" size="small" aria-label="edit">
-                <DeleteIcon />
-              </Fab>
-            </div>
-          </li>
+            
+          )
+          })}
+         
         </ul>
       </div>
     </div>
