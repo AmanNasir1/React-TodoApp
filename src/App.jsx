@@ -9,7 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [todo, setTodo] = useState("");
-
+  const [editTodoValue, setEditTodoValue] = useState("");
   const addTodo = () => {
     todo === ""
       ? alert("Enter Something")
@@ -32,9 +32,10 @@ function App() {
     setTodoList(todoList.filter((task) => task.id !== id));
   };
 
-const editTodo = (id,value)=>{
-console.log("id=>",id,"value=>",value )
-}
+  const editTodo = (id, value) => {
+    
+    console.log("id=>", id, "value=>", value);
+  };
 
   return (
     <div className="app">
@@ -80,7 +81,7 @@ console.log("id=>",id,"value=>",value )
                     className="editBtn"
                     size="small"
                     aria-label="edit"
-                    onClick={()=>editTodo(value.id,value.taskName) }
+                    onClick={() => editTodo(value.id, value.taskName)}
                   >
                     <EditIcon />
                   </Fab>
